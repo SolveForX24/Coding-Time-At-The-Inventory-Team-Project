@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Coding Time At The Inventory Team Project.cpp" />
+    <ClCompile Include="FileData.cpp" />
     <ClCompile Include="GetDataR2.cpp" />
     <ClCompile Include="solveFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileData.h" />
     <ClInclude Include="GetData.h" />
     <ClInclude Include="solveFunctions.h" />
   </ItemGroup>
