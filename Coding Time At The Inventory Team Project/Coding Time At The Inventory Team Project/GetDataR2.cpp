@@ -13,8 +13,6 @@ for example 5.2 will covert to 5.199999 Something to correct for in future revis
 4/17/2021
 	 changed stof() to stod() in GetValidDouble() - oops Even teachers make mistakes!
 	 NOTE: due to convesions in stof - the number will be close mut not exact
-12/22/21
-	slight change by me, Xander, so that there is a version of the function that will not allow negatives, and a version that both does not allow negatives or zeroes.
 */
 
 
