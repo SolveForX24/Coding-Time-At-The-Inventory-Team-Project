@@ -4,7 +4,7 @@
 
 #include "GetData.h"
 #include "FileData.h"
-#include "solveFunctions.h";
+#include "InventoryManagement.h";
 
 using namespace std;
 
