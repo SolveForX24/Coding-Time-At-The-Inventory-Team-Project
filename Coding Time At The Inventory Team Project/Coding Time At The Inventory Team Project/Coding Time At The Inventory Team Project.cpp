@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 int main()
 {
     bool running = true;
@@ -34,6 +33,8 @@ int main()
             // print inventory
             break;
         }
+        
+        cout << endl;
 
         writeToFile(inventory);
     }
