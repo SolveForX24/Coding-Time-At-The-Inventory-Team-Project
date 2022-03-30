@@ -41,6 +41,7 @@ void createItem(vector<vector<string>>& inven) {
 	getline(cin, dummy);
 
 	// Index is the position in the vector that our item will take
+
 	prompt = to_string(inven.size());
 
 	item.push_back(prompt);

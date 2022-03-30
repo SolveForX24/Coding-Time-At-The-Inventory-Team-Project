@@ -4,6 +4,8 @@
 
 #include "FileData.h"
 
+using namespace std;
+
 void readFromFile(vector<vector<string>>& inventory) {
     ifstream fin("data.txt");
 
