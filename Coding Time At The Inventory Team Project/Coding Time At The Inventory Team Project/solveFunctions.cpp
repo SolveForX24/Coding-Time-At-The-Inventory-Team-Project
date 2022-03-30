@@ -36,7 +36,7 @@ void createItem(vector<vector<string>> inven) {
 	item.push_back(prompt);
 	getline(cin, dummy);
 
-	string prompt = to_string(inven.size());
+	prompt = to_string(inven.size());
 
 	item.push_back(prompt);
 

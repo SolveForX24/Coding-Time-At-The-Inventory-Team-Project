@@ -22,6 +22,7 @@ for example 5.2 will covert to 5.199999 Something to correct for in future revis
 #include <regex>
 using std::cin;
 using std::cout;
+using std::string;
 
 bool getValidInt(int& t_int) {
 	std::string intScratch = "";
@@ -142,4 +143,28 @@ bool getValidDouble(double& t_double) {
 		}
 	}
 	return isValid;
+}
+
+int promptInt(string prompt, int min, int max) {
+	int choice;
+	do {
+		cout << prompt;
+	} while (!getValidInt(choice) || choice < min || choice > max);
+	return choice;
+}
+
+float promptFloat(string prompt, float min, float max) {
+	float choice;
+	do {
+		cout << prompt;
+	} while (!getValidFloat(choice) || choice < min || choice > max);
+	return choice;
+}
+
+double promptDouble(string prompt, double min, double max) {
+	double choice;
+	do {
+		cout << prompt;
+	} while (!getValidDouble(choice) || choice < min || choice > max);
+	return choice;
 }

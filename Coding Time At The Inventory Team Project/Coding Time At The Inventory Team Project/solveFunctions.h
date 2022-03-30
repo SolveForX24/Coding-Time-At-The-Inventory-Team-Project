@@ -1,3 +1,6 @@
 #pragma once
 
-void createItem(vector<vector<string>>);
+#include <vector>
+#include <string>
+
+void createItem(std::vector<std::vector<std::string>>&);

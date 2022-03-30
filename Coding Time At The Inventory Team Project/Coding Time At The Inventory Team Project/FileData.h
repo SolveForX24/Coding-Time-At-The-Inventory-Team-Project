@@ -1,4 +1,7 @@
 #pragma once
 
-void readFromFile(vector<vector<string>>&);
-void writeToFile(vector<vector<string>>&);
+#include <string>
+#include <vector>
+
+void readFromFile(std::vector<std::vector<std::string>>&);
+void writeToFile(std::vector<std::vector<std::string>>&);
