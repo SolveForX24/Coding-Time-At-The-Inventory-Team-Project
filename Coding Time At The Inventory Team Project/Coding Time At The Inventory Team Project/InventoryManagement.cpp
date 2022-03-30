@@ -5,7 +5,8 @@
 
 #include "GetData.h"
 
-#include "solveFunctions.h"
+
+#include "InventoryManagement.h"
 using namespace std;
 
 void createItem(vector<vector<string>>& inven) {
@@ -38,7 +39,7 @@ void createItem(vector<vector<string>>& inven) {
 	cout << "Please enter the item name: ";
 	getline(cin, prompt);
 	item.push_back(prompt);
-	getline(cin, dummy);
+	//getline(cin, dummy);
 
 	// Index is the position in the vector that our item will take
 
@@ -50,13 +51,13 @@ void createItem(vector<vector<string>>& inven) {
 	do {
 		cout << "Did someone donate this " + item[0] + "? (y/n) ";
 		getline(cin, prompt);
-		getline(cin, dummy);
+		//getline(cin, dummy);
 	} while (prompt != "y" && prompt != "Y" && prompt != "n" && prompt != "N");
 
 	if (prompt == "Y" || prompt == "y") {
 		cout << "Please enter the name of the person who donated this: ";
 		getline(cin, prompt);
-		getline(cin, dummy);
+		//getline(cin, dummy);
 		item.push_back(prompt);
 	}
 	else {
@@ -119,7 +120,7 @@ void createItem(vector<vector<string>>& inven) {
 	do {
 		cout << "Is there a sale on this " + item[0] + "? (y/n) ";
 		getline(cin, prompt);
-		getline(cin, dummy);
+		//getline(cin, dummy);
 	} while (prompt != "y" && prompt != "Y" && prompt != "n" && prompt != "N");
 
 	if (prompt == "y" || prompt == "Y") {
@@ -134,4 +135,50 @@ void createItem(vector<vector<string>>& inven) {
 
 	// Push to inventory
 	inven.push_back(item);
+}
+
+void deleteItem(vector<vector<string>>& inven) {
+
+	// Variables
+	string strPrompt;
+	string dummy;
+
+	//Get way to remove item
+	int intPrompt = promptInt("Would you like to delete item based on name (1) or by ID (2)? ", 1, 2);
+
+	switch (intPrompt) {
+	case 1:
+		// If deleting by name, get name (making sure it's in the vector) then erase based on index of that item.
+		int index;
+		do {
+			cout << "Please enter the name of the item: ";
+			getline(cin, strPrompt);
+			getline(cin, dummy);
+		} while (customFind(inven, strPrompt, index));
+		inven.erase(inven.begin() + index);
+		break;
+	case 2:
+		// Get index, then erase.
+		intPrompt = promptInt("Please enter the ID of the item: ", 1, inven.size());
+		inven.erase(inven.begin() + index);
+	}
+
+}
+
+// My function to find the item in the vector.
+bool customFind(vector<vector<string>> vect, string key, int& index) {
+
+	// Loop through the vector, checking each value in each row and the first column.
+	for (int i = 0; i <= vect.size() - 1; i++) {
+		//cout << "At row " << i << ", there is " << vect[i][0] << "\n\n";
+		// If key found, print as such, update the pass-by reference variables and leave the function.
+		if (vect[i][0] == key) {
+			cout << "Item Found!\n";
+			index = i;
+			return false;
+		}
+	}
+	// If key not found, print as such, and leave.
+	cout << "Item not found.\n\n";
+	return true;
 }

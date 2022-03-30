@@ -21,10 +21,10 @@
     <ClCompile Include="GetDataR2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="solveFunctions.cpp">
+    <ClCompile Include="FileData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileData.cpp">
+    <ClCompile Include="InventoryManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SortAndPrint.cpp">
@@ -35,10 +35,10 @@
     <ClInclude Include="GetData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solveFunctions.h">
+    <ClInclude Include="FileData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileData.h">
+    <ClInclude Include="InventoryManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SortAndPrint.h">
