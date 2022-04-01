@@ -61,8 +61,8 @@ void printInventory(vector<vector<string>>& inventory) {
 	int algorithm = promptInt("Enter your choice (1-2): ", 1, 2);
 
 	cout << endl << "What do you want to sort by? " << endl
-		<< "1) ID" << endl
-		<< "2) Name" << endl
+		<< "1) Name" << endl
+		<< "2) ID" << endl
 		<< "3) Donar" << endl
 		<< "4) Price" << endl;
 	int index = promptInt("Enter your choice (1-4): ", 1, 4);
@@ -78,7 +78,7 @@ void printInventory(vector<vector<string>>& inventory) {
 	}
 
 	cout << endl << "========== INVENTORY ==========" << endl;
-	for (int i = 0; i < sortedInventory.size(); i++) {
+	for (int i = sortedInventory.size() - 1; i >= 0; i--) {
 		cout << endl << "ID: " << sortedInventory[i][0] << endl
 			<< "Name: " << sortedInventory[i][1] << endl
 			<< "Donar: " << sortedInventory[i][2] << endl
