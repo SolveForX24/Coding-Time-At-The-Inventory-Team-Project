@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,6 +6,7 @@
 #include "GetData.h"
 #include "FileData.h"
 #include "InventoryManagement.h";
+#include "SortAndPrint.h";
 
 using namespace std;
 
@@ -14,24 +16,31 @@ int main()
     vector<vector<string>> inventory;
     readFromFile(inventory);
 
+    cout.setf(ios::fixed);
+    cout << setprecision(2);
+
     while (running) {
         cout << "What would you like to do?" << endl
             << "1) Add item to inventory" << endl
             << "2) Remove item from inventory" << endl
-            << "3) Print items in inventory" << endl;
+            << "3) Print items in inventory" << endl
+            << "4) End program" << endl;
 
-        int action = promptInt("Enter choice: ", 1, 3);
+        int action = promptInt("Enter choice: ", 1, 4);
 
         switch (action) {
         case 1:
             createItem(inventory);
             break;
         case 2:
-            // remove item
+            deleteItem(inventory);
             break;
         case 3:
-            // print inventory
+            printInventory(inventory);
             break;
+        case 4:
+            cout << "Thank you for using Raytek Inventory! ";
+            running = false;
         }
         
         cout << endl;

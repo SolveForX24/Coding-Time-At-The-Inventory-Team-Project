@@ -29,7 +29,7 @@ void createItem(vector<vector<string>>& inven) {
 	string prompt;
 	string dummy;
 
-	string posString;
+	string posString = "A";
 
 	int intPrompt;
 
@@ -67,13 +67,13 @@ void createItem(vector<vector<string>>& inven) {
 	// Get price and stock.
 	do {
 		cout << "Please enter the price of the item: ";
-	} while (!getValidDouble(doubPrompt) && doubPrompt < 0);
+	} while (!getValidDouble(doubPrompt) || doubPrompt < 0);
 
 	item.push_back(to_string(doubPrompt));
 
 	do {
 		cout << "Please enter how many of the item we have received: ";
-	} while (!getValidInt(intPrompt) && intPrompt < 1);
+	} while (!getValidInt(intPrompt) || intPrompt < 1);
 
 	item.push_back(to_string(intPrompt));
 
@@ -86,7 +86,7 @@ void createItem(vector<vector<string>>& inven) {
 
 	do {
 		cout << "Please enter the department the item belongs to (1-5): ";
-	} while (!getValidInt(intPrompt) && intPrompt < 1 && intPrompt > 5);
+	} while (!getValidInt(intPrompt) || intPrompt < 1 || intPrompt > 5);
 
 	item.push_back(to_string(intPrompt));
 
@@ -95,24 +95,23 @@ void createItem(vector<vector<string>>& inven) {
 	// Get shelf position.
 	do {
 		cout << "Please enter the aisle this item belongs on: ";
-	} while (!getValidInt(intPrompt));
+	} while (!getValidInt(intPrompt) || intPrompt < 1);
 	posString += to_string(intPrompt);
-	posString += "-";
+	posString += "-B";
 	do {
 		cout << "Please enter the bay this item belongs on: ";
-	} while (!getValidInt(intPrompt));
+	} while (!getValidInt(intPrompt) || intPrompt < 1);
 	posString += to_string(intPrompt);
-	posString += "-";
+	posString += "-S";
 	do {
 		cout << "Please enter the shelf this item belongs on: ";
-	} while (!getValidInt(intPrompt));
+	} while (!getValidInt(intPrompt) || intPrompt < 1);
 	posString += to_string(intPrompt);
-	posString += "-";
+	posString += "-P";
 	do {
 		cout << "Please enter the position this item belongs on: ";
-	} while (!getValidInt(intPrompt));
+	} while (!getValidInt(intPrompt) || intPrompt < 1);
 	posString += to_string(intPrompt);
-	posString += "-";
 
 	item.push_back(posString);
 
@@ -126,7 +125,7 @@ void createItem(vector<vector<string>>& inven) {
 	if (prompt == "y" || prompt == "Y") {
 		do {
 			cout << "Please enter the percent sale: %";
-		} while (!getValidDouble(doubPrompt) && doubPrompt > 0 && doubPrompt < 100);
+		} while (!getValidDouble(doubPrompt) || doubPrompt > 0 || doubPrompt < 100);
 		item.push_back(to_string(1 - (doubPrompt / 100)));
 	}
 	else {
@@ -153,7 +152,7 @@ void deleteItem(vector<vector<string>>& inven) {
 		do {
 			cout << "Please enter the name of the item: ";
 			getline(cin, strPrompt);
-			getline(cin, dummy);
+			//getline(cin, dummy);
 		} while (customFind(inven, strPrompt, index));
 		inven.erase(inven.begin() + index);
 		break;
