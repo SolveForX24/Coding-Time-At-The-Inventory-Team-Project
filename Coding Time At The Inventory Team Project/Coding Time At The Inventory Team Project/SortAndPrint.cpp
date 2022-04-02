@@ -6,91 +6,94 @@
 
 using namespace std;
 
+bool compare(const string& item1, const string& item2, int index) {
+    switch (index) {
+        case 1:
+            return stoi(item1) > stoi(item2);
+        case 3:
+            return stod(item1) > stod(item2);
+        default:
+            return item1 > item2;
+    }
+}
+
 vector<vector<string>> exchangeSort(vector<vector<string>> inventory, int index) {
+    vector<string> temp;
+    int inventoryLength = (int) inventory.size();
+
+    for (int i = 0; i < inventoryLength - 1; i++) {
+        for(int j = i + 1; j < inventoryLength; j++) {
+            if (compare(inventory[i][index], inventory[j][index], index)) {
+                temp = inventory[i];
+                inventory[i] = inventory[j];
+                inventory[j] = temp;
+            }
+        }
+    }
+
 	return inventory;
 }
 
-// partitions array & returns middle subscript
-int partition(vector<vector<string>>& array, int top, int bottom, int index)
-{
-	string x = array[top][index];
-	int i = top - 1;
-	int j = bottom + 1;
-	string temp;
-	do {
-		do {
-			j--;
-		} while (x > array[j][index]);
-		do {
-			i++;
-		} while (x < array[i][index]);
+vector<vector<string>> shellSort(vector<vector<string>> inventory, int index) {
+    int flag = 1, inventoryLength = (int) inventory.size(), d = inventoryLength;
+    vector<string> temp;
 
-		if (i < j)
-		{
-			temp = array[i][index];
-			array[i][index] = array[j][index];
-			array[j][index] = temp;
-		}
-	} while (i < j);
+    while(flag || (d > 1)) {
+        flag = 0; // reset flag to 0 to check for future swaps
+        d = (d + 1) / 2;
+        for (int i = 0; i < inventoryLength - d; i++) {
+            if (compare(inventory[i][index], inventory[i + d][index], index)) {
+                temp = inventory[i + d]; // swap positions i+d and i
+                inventory[i + d] = inventory[i];
+                inventory[i] = temp;
+                flag = 1; // tells swap has occurred
+            }
+        }
+    }
 
-	return j; // returns middle subscript 
-}
-
-void doQuickSort(vector<vector<string>>&inv, int top, int bottom, int index) {
-	int middle;
-	if (top < bottom)
-	{
-		middle = partition(inv, top, bottom, index);
-
-		// sort first section 
-		doQuickSort(inv, top, middle, index);
-		// sort second section
-		doQuickSort(inv, middle + 1, bottom, index);
-	}
-}
-
-vector<vector<string>> quickSort(vector<vector<string>> inventory, int index, int top, int bottom) {
-	doQuickSort(inventory, 0, inventory.size() - 1, index);
 	return inventory;
 }
 
 void printInventory(vector<vector<string>>& inventory) {
-	cout << "\nWhat sorting algorithm would you like to use? " << endl
+	cout << endl << "What sorting algorithm would you like to use? " << endl
 		<< "1) Exchange Sort" << endl
-		<< "2) Quick Sort" << endl;
+		<< "2) Shell Sort" << endl;
 	int algorithm = promptInt("Enter your choice (1-2): ", 1, 2);
 
 	cout << endl << "What do you want to sort by? " << endl
 		<< "1) Name" << endl
 		<< "2) ID" << endl
-		<< "3) Donar" << endl
+		<< "3) Donor" << endl
 		<< "4) Price" << endl;
 	int index = promptInt("Enter your choice (1-4): ", 1, 4);
 
 	vector<vector<string>> sortedInventory;
 	switch (algorithm) {
-	case 1:
-		sortedInventory = exchangeSort(inventory, index - 1);
-		break;
-	case 2:
-		sortedInventory = quickSort(inventory, index - 1, 0, inventory.size() - 1);
-		break;
+	    case 1:
+		    sortedInventory = exchangeSort(inventory, index - 1);
+		    break;
+	    case 2:
+		    sortedInventory = shellSort(inventory, index - 1);
+		    break;
+        default:
+            sortedInventory = inventory;
+            break;
 	}
 
 	cout << endl << "========== INVENTORY ==========" << endl;
-	for (int i = sortedInventory.size() - 1; i >= 0; i--) {
-		cout << endl << "ID: " << sortedInventory[i][0] << endl
-			<< "Name: " << sortedInventory[i][1] << endl
-			<< "Donar: " << sortedInventory[i][2] << endl
-			<< "Base Price: $" << stod(sortedInventory[i][3]) << endl
-			<< "Stock: " << sortedInventory[i][4] << endl
-			<< "Department: " << sortedInventory[i][5] << endl
-			<< "Shelf Location: " << sortedInventory[i][6] << endl;
-		if (sortedInventory[i][7] == "N/A") {
+	for (vector<string>& item : sortedInventory) {
+		cout << endl << "Name: " << item[0] << endl
+			<< "ID: " << item[1] << endl
+			<< "Donor: " << item[2] << endl
+			<< "Base Price: $" << stod(item[3]) << endl
+			<< "Stock: " << item[4] << endl
+			<< "Department: " << item[5] << endl
+			<< "Shelf Location: " << item[6] << endl;
+		if (item[7] == "N/A") {
 			cout << "Sale: N/A" << endl;
 		}
 		else {
-			cout << "Sale: " << sortedInventory[i][7] << " % " << endl;
+			cout << "Sale: " << item[7] << " % " << endl;
 		}
 	}
 	cout << endl << "===============================" << endl;
