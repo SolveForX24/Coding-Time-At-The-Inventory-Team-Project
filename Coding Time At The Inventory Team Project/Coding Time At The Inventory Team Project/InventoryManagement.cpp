@@ -192,7 +192,7 @@ bool customDelete(vector<vector<string>>& vect, int key) {
 	for (int i = 0; i <= vect.size() - 1; i++) {
 		// If key found, print as such, delete the vector there and leave the function.
 		if (stoi(vect[i][1]) == key) {
-			cout << "ID found!\n";
+			cout << "\nID found!\n";
 			vect.erase(vect.begin() + i);
 			cout << "\nItem deleted!\n";
 			return false;
@@ -216,5 +216,6 @@ int indexFind(vector<vector<string>> vect) {
 			indexProspect = check;
 		}
 	}
+	cout << "Index used: " << indexProspect << ".\n";
 	return indexProspect;
 }
