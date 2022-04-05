@@ -146,9 +146,9 @@ void deleteItem(vector<vector<string>>& inven) {
 	int intPrompt = promptInt("Would you like to delete item based on name (1) or by ID (2)? ", 1, 2);
 
 	switch (intPrompt) {
+	int index;
 	case 1:
 		// If deleting by name, get name (making sure it's in the vector) then erase based on index of that item.
-		int index;
 		do {
 			cout << "Please enter the name of the item: ";
 			getline(cin, strPrompt);
@@ -158,12 +158,12 @@ void deleteItem(vector<vector<string>>& inven) {
 		cout << "Item deleted!\n";
 		break;
 	case 2:
-		// Get index, then erase.
+		// Get index, then the ID of the item the user wants to use. Make sure t.
+		index = indexFind(inven);
 		do {
 			intPrompt = promptInt("Please enter the ID of the item: ", 0, inven.size());
-		} while (intPrompt >= inven.size() || intPrompt < 0);
-		inven.erase(inven.begin() + intPrompt);
-		cout << "\nItem deleted!\n";
+		} while (intPrompt > index || intPrompt < 0);
+		customDelete(inven, intPrompt);
 	}
 
 }
@@ -184,4 +184,37 @@ bool customFind(vector<vector<string>> vect, string key, int& index) {
 	// If key not found, print as such, and leave.
 	cout << "Item not found.\n\n";
 	return true;
+}
+
+// My function to delete a item in the vector.
+bool customDelete(vector<vector<string>>& vect, int key) {
+	// Loop through the vector, checking each value in each row and the first column.
+	for (int i = 0; i <= vect.size() - 1; i++) {
+		// If key found, print as such, delete the vector there and leave the function.
+		if (stoi(vect[i][1]) == key) {
+			cout << "ID found!\n";
+			vect.erase(vect.begin() + i);
+			cout << "\nItem deleted!\n";
+			return false;
+		}
+	}
+	// If key not found, print as such, and leave.
+	cout << "ID not found.\n\n";
+	return true;
+}
+
+// Finds the highest index possible.
+int indexFind(vector<vector<string>> vect) {
+	// Variables.
+	int indexProspect = stoi(vect[0][1]);
+	int check;
+
+	// Loop through vector, checking IDs.
+	for (int i = 1; i < vect.size(); i++) {
+		check = stoi(vect[i][1]);
+		if (check > indexProspect) {
+			indexProspect = check;
+		}
+	}
+	return indexProspect;
 }
