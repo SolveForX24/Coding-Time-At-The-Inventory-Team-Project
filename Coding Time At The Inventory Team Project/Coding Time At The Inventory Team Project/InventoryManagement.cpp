@@ -125,8 +125,8 @@ void createItem(vector<vector<string>>& inven) {
 	if (prompt == "y" || prompt == "Y") {
 		do {
 			cout << "Please enter the percent sale: %";
-		} while (!getValidDouble(doubPrompt) || doubPrompt > 0 || doubPrompt < 100);
-		item.push_back(to_string(1 - (doubPrompt / 100)));
+		} while (!getValidDouble(doubPrompt) || doubPrompt <= 0 || doubPrompt > 100);
+		item.push_back(to_string(doubPrompt));
 	}
 	else {
 		item.push_back("N/A");
@@ -155,11 +155,15 @@ void deleteItem(vector<vector<string>>& inven) {
 			//getline(cin, dummy);
 		} while (customFind(inven, strPrompt, index));
 		inven.erase(inven.begin() + index);
+		cout << "Item deleted!\n";
 		break;
 	case 2:
 		// Get index, then erase.
-		intPrompt = promptInt("Please enter the ID of the item: ", 1, inven.size());
-		inven.erase(inven.begin() + index);
+		do {
+			intPrompt = promptInt("Please enter the ID of the item: ", 0, inven.size());
+		} while (intPrompt >= inven.size() || intPrompt < 0);
+		inven.erase(inven.begin() + intPrompt);
+		cout << "\nItem deleted!\n";
 	}
 
 }
@@ -172,7 +176,7 @@ bool customFind(vector<vector<string>> vect, string key, int& index) {
 		//cout << "At row " << i << ", there is " << vect[i][0] << "\n\n";
 		// If key found, print as such, update the pass-by reference variables and leave the function.
 		if (vect[i][0] == key) {
-			cout << "Item Found!\n";
+			cout << "Item found!\n";
 			index = i;
 			return false;
 		}

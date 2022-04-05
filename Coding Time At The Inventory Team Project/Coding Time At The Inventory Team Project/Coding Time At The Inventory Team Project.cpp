@@ -19,6 +19,8 @@ int main()
     cout.setf(ios::fixed);
     cout << setprecision(2);
 
+    cout << "Welcome to Goodwill Inventory Systems!\n\n";
+
     while (running) {
         cout << "What would you like to do?" << endl
             << "1) Add item to inventory" << endl
@@ -39,7 +41,7 @@ int main()
             printInventory(inventory);
             break;
         case 4:
-            cout << "Thank you for using Raytek Inventory! ";
+            cout << "Thank you for using Goodwill Inventory! ";
             running = false;
         }
         

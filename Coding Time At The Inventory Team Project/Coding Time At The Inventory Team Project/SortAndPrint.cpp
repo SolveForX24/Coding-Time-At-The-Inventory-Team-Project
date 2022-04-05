@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 
@@ -55,6 +56,10 @@ vector<vector<string>> shellSort(vector<vector<string>> inventory, int index) {
 }
 
 void printInventory(vector<vector<string>>& inventory) {
+	
+	cout.setf(ios::fixed);
+	cout << setprecision(2);
+
 	cout << endl << "What sorting algorithm would you like to use? " << endl
 		<< "1) Exchange Sort" << endl
 		<< "2) Shell Sort" << endl;
@@ -93,7 +98,8 @@ void printInventory(vector<vector<string>>& inventory) {
 			cout << "Sale: N/A" << endl;
 		}
 		else {
-			cout << "Sale: " << item[7] << " % " << endl;
+			double salePrintOut = stod(item[7]);
+			cout << "Sale: " << salePrintOut << "% " << endl;
 		}
 	}
 	cout << endl << "===============================" << endl;
