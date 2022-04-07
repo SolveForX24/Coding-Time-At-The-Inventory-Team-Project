@@ -2,15 +2,19 @@
 #include <vector>
 #include <string>
 #include <iomanip> 
+#include <random>
 
 #include "GetData.h"
 
-
 #include "InventoryManagement.h"
+
 using namespace std;
 
 void createItem(vector<vector<string>>& inven) {
 	
+	// Setting random seed and cout precision.
+	srand(time(NULL));
+
 	/*
 		Name
 		ID
@@ -41,9 +45,11 @@ void createItem(vector<vector<string>>& inven) {
 	item.push_back(prompt);
 	//getline(cin, dummy);
 
-	// Index is the position in the vector that our item will take
+	// Index is a random number,
 
-	prompt = to_string(inven.size());
+	do {
+		prompt = to_string(rand());
+	} while (idCheck(inven, prompt));
 
 	item.push_back(prompt);
 
@@ -161,7 +167,7 @@ void deleteItem(vector<vector<string>>& inven) {
 		// Get index, then the ID of the item the user wants to use. Make sure t.
 		index = indexFind(inven);
 		do {
-			intPrompt = promptInt("Please enter the ID of the item: ", 0, inven.size());
+			intPrompt = promptInt("Please enter the ID of the item: ", 0, 2147483647);
 		} while (intPrompt > index || intPrompt < 0);
 		customDelete(inven, intPrompt);
 	}
@@ -173,10 +179,9 @@ bool customFind(vector<vector<string>> vect, string key, int& index) {
 
 	// Loop through the vector, checking each value in each row and the first column.
 	for (int i = 0; i <= vect.size() - 1; i++) {
-		//cout << "At row " << i << ", there is " << vect[i][0] << "\n\n";
 		// If key found, print as such, update the pass-by reference variables and leave the function.
 		if (vect[i][0] == key) {
-			cout << "Item found!\n";
+			cout << "\nItem found!\n";
 			index = i;
 			return false;
 		}
@@ -194,7 +199,7 @@ bool customDelete(vector<vector<string>>& vect, int key) {
 		if (stoi(vect[i][1]) == key) {
 			cout << "\nID found!\n";
 			vect.erase(vect.begin() + i);
-			cout << "\nItem deleted!\n";
+			cout << "Item deleted!\n";
 			return false;
 		}
 	}
@@ -216,6 +221,18 @@ int indexFind(vector<vector<string>> vect) {
 			indexProspect = check;
 		}
 	}
-	cout << "Index used: " << indexProspect << ".\n";
+	//cout << "Index used: " << indexProspect << ".\n";
 	return indexProspect;
+}
+
+// Finds the highest index possible.
+bool idCheck(vector<vector<string>> vect, string prompt) {
+
+	// Loop through vector, checking IDs against the prompt.
+	for (int i = 1; i < vect.size(); i++) {
+		if (vect[i][1] == prompt) {
+			return true;
+		}
+	}
+	return false;
 }
