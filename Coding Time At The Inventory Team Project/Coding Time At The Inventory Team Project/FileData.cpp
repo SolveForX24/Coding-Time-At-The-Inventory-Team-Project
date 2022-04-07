@@ -7,39 +7,42 @@
 using namespace std;
 
 void readFromFile(vector<vector<string>>& inventory) {
-    ifstream fin("data.txt");
+    ifstream in("data.txt");
 
-    if (fin.good()) {
-        int i = 0;
+    // If file exists
+    if (in.good()) {
         vector<string> currentItem;
         string line;
 
-        while (fin.peek() != EOF) {
-            getline(fin, line);
+        // Loop through each line of the file
+        while (in.peek() != EOF) {
+            getline(in, line);
 
-            if (line == "") {
-                i = 0;
+            // If the line is empty, push the item to the inventory and start reading properties into a new item
+            if (line.empty()) {
                 inventory.push_back(currentItem);
                 currentItem = vector<string>();
                 continue;
             }
 
+            // Read this property into the item
             currentItem.push_back(line);
         }
     }
 
-    fin.close();
+    in.close();
 }
 
 void writeToFile(vector<vector<string>>& inventory) {
-    ofstream fout("data.txt");
+    ofstream out("data.txt");
 
-    for (int i = 0; i < inventory.size(); i++) {
-        for (int j = 0; j < inventory[i].size(); j++) {
-            fout << inventory[i][j] << endl;
+    // Loop through each property of each item, and save it in a file
+    for (vector<string>& item : inventory) {
+        for (string& property : item) {
+            out << property << endl;
         }
-        fout << endl;
+        out << endl;
     }
 
-    fout.close();
+    out.close();
 }
