@@ -1,3 +1,10 @@
+/*
+    Names: Xander Russell, Matthew Weir
+	Lab: Coding Time At The Inventory
+	Date: 3/24/22
+	Extra: The inventory is saved between runs.
+*/
+
 #include <iomanip>
 #include <iostream>
 #include <string>
